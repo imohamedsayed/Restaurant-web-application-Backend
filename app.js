@@ -4,8 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
 
-const dbURI =
-  "mongodb+srv://MSO:mso123456@node.d5zfykw.mongodb.net/restaurant?retryWrites=true&w=majority";
+const dbURI = "mongodb://localhost:27017/restaurant";
 
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -32,7 +31,11 @@ app.use("/api/auth", require("./routes/AuthRoutes"));
 */
 
 app.use("/api-dashboard/category", require("./routes/CategoryRoutes"));
+app.use("/api-dashboard/dishes", require("./routes/DishRoutes"));
+app.use("/api-dashboard/users", require("./routes/UserRoutes"));
 
 /*
   --> Website Routes
 */
+
+app.use("/api/category", require("./routes/website/CategoryRoutes"));
