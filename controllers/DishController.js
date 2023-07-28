@@ -137,8 +137,8 @@ const updateDish = async (req, res) => {
 const getCategoryDishes = async (req, res) => {
   try {
     const dishes = await Dish.find({ category: req.params.id });
-
-    res.status(200).json(dishes);
+    const category = await Category.findById(req.params.id);
+    res.status(200).json({ dishes, category: category });
   } catch (err) {
     res.status(500).json({
       errors: err,
@@ -163,7 +163,19 @@ const dishStats = async (req, res) => {
     });
   }
 };
+const getCartItems = async (req, res) => {
+  try {
+    const { ids } = req.body;
 
+    const items = await Dish.find({ _id: { $in: ids } });
+
+    res.status(200).json({ items });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ errors: err, message: "Something went wrong, try again later" });
+  }
+};
 module.exports = {
   addDish,
   getDish,
@@ -172,4 +184,5 @@ module.exports = {
   updateDish,
   getCategoryDishes,
   dishStats,
+  getCartItems,
 };

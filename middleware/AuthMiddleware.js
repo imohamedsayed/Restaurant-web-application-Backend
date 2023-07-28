@@ -32,6 +32,7 @@ const requireCustomer = (req, res, next) => {
       if (err) {
         res.status(401).json({ message: "Your are not authorized." });
       } else {
+        res.locals.userId = decodedToken.id;
         next();
       }
     });

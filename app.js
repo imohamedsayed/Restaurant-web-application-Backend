@@ -39,3 +39,5 @@ app.use("/api-dashboard/users", require("./routes/UserRoutes"));
 */
 
 app.use("/api/category", require("./routes/website/CategoryRoutes"));
+app.use("/api/dishes", require("./routes/website/DishRoutes"));
+app.use("/api/orders", require("./routes/website/OrderRoutes"));
