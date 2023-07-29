@@ -80,16 +80,8 @@ const adminLogin = async (req, res) => {
   }
 };
 
-const test = (req, res) => {
-  const { authorization } = req.headers;
-  const [, token] = authorization.split(" ");
-
-  // console.log(token);
-};
-
 module.exports = {
   signup,
-  test,
   login,
   adminLogin,
 };

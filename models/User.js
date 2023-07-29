@@ -34,7 +34,6 @@ UserSchema.pre("save", async function (next) {
 
   next();
 });
-
 UserSchema.statics.login = async function ({ email, password }) {
   const customer = await User.findOne({ email: email });
   if (customer) {
@@ -57,6 +56,27 @@ UserSchema.statics.AdminLogin = async function ({ email, password }) {
     throw Error("Incorrect Password");
   } else {
     throw Error("Incorrect email");
+  }
+};
+
+UserSchema.statics.changePassword = async function ({
+  id,
+  oldPassword,
+  newPassword,
+}) {
+  const user = await this.findById(id);
+  const passwordFlag = await bcrypt.compare(oldPassword, user.password);
+  if (passwordFlag) {
+    const salt = await bcrypt.genSalt();
+    const hashed = await bcrypt.hash(newPassword, salt);
+
+    const updatedUser = await this.findByIdAndUpdate(id, {
+      password: hashed,
+    });
+
+    return updatedUser;
+  } else {
+    throw Error("Incorrect old Password");
   }
 };
 

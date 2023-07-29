@@ -17,6 +17,4 @@ router.post("/login", AuthController.login);
 */
 router.post("/dashboard/login", AuthController.adminLogin);
 
-router.get("/test", requireAdmin, AuthController.test);
-
 module.exports = router;
