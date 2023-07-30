@@ -33,6 +33,7 @@ app.use("/api/auth", require("./routes/AuthRoutes"));
 app.use("/api-dashboard/category", require("./routes/CategoryRoutes"));
 app.use("/api-dashboard/dishes", require("./routes/DishRoutes"));
 app.use("/api-dashboard/users", require("./routes/UserRoutes"));
+app.use("/api-dashboard/orders", require("./routes/OrderRoutes"));
 
 /*
   --> Website Routes
